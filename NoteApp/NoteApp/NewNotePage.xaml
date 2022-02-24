@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NoteApp.NewNotePage"
+             Title="Add new Note">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Submit"
+                     IconImageSource="checkIcon"
+                     Priority="2"
+                     Order="Primary"
+                     Clicked="ToolbarItemSubmit_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <!--This is the field for adding new note-->
+    <StackLayout BackgroundColor="#E37D2E">
+        <Entry x:Name="title" Keyboard="Text" Placeholder="Title"
+               ReturnType="Next" ClearButtonVisibility="WhileEditing" Text="{Binding Title}"/>
+
+        <StackLayout Orientation="Horizontal">
+
+            <Image x:Name="displayIcon"
+                   HeightRequest="50"
+                   WidthRequest="50"/>
+
+            <Picker Title="Select Icon"
+                    x:Name="IconPicker"
+                    ItemDisplayBinding="{Binding IconName}"
+                    SelectedIndexChanged="IconPicker_SelectedIndexChanged"
+                    WidthRequest="100"
+                    TitleColor="Black"/>
+
+        </StackLayout>
+        <Editor x:Name="contentText" 
+                Keyboard="Text" 
+                Placeholder="What's on your mind?"
+                AutoSize="TextChanges" 
+                Text="{Binding NoteContent}"
+                BackgroundColor="#F59042"
+                VerticalOptions="FillAndExpand"/>
+    </StackLayout>
+</ContentPage>

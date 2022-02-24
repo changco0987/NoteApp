@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NoteApp.MainPage"
+             Title="Your Notes">
+    
+    <!--The app's navigation bar-->
+    <ContentPage.ToolbarItems>
+        <!--Add btn-->
+        <ToolbarItem Text="Add"
+                     IconImageSource="addIcon"
+                     Priority="1"
+                     Order="Primary"
+                     Clicked="ToolbarItem_Clicked"/>
+        <!--Exit btn-->
+        <ToolbarItem Text="Exit"
+                     IconImageSource="exit.png" 
+                     Priority="2"
+                     Order="Primary"
+                     Clicked="ToolbarItem_Clicked_2"/>
+
+    </ContentPage.ToolbarItems>
+    
+    <!--The app's main contents-->
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#E37D2E">
+            <!--This is the search bar-->
+            <SearchBar Placeholder="Search Note" TextChanged="SearchBar_TextChanged"/>
+
+            <ListView x:Name="notesListView" SeparatorColor="Black" ItemTapped="notesListView_ItemTapped" Refreshing="notesListView_Refreshing" IsPullToRefreshEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        
+                                        <!--Delete Swipe Action-->
+                                        <SwipeItem Text="Delete"
+                                                   BackgroundColor="Red"
+                                                   Invoked="SwipeItemDelete_Invoked"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <StackLayout Orientation="Horizontal" BackgroundColor="#E37D2E">
+                                    <Image Source="{Binding Icon}"
+                                           HeightRequest="40" 
+                                           WidthRequest="70"
+                                           VerticalOptions="Center"/>
+                                    
+                                    <StackLayout HorizontalOptions="StartAndExpand" Spacing="0">
+
+                                        <Label Text="{Binding Title}"
+                                               FontSize="Medium"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               VerticalOptions="Center"
+                                               VerticalTextAlignment="Center"/>
+
+                                    </StackLayout>
+                                
+                                </StackLayout>
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+                
+                
+            </ListView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+
+
+</ContentPage>
